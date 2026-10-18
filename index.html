@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reel</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <span class="mark">Reel</span>
+        <span id="project-name">Untitled</span>
+        <div class="toolbar">
+          <div class="group">
+            <button type="button" id="import-btn">Import</button>
+            <button type="button" id="matte-btn">Matte</button>
+            <button type="button" id="title-btn">Title</button>
+            <button type="button" id="tone-btn">Tone</button>
+            <button type="button" id="lower-btn">Lower third</button>
+          </div>
+          <div class="group">
+            <label class="export-size">
+              <select id="aspect" aria-label="Frame aspect">
+                <option value="16:9" selected>16:9</option>
+                <option value="9:16">9:16</option>
+                <option value="1:1">1:1</option>
+                <option value="4:5">4:5</option>
+              </select>
+            </label>
+            <button type="button" id="grade-btn">Grade</button>
+            <button type="button" id="split-screen-btn">Split screen</button>
+            <label class="export-size">
+              <select id="arrange" aria-label="Picture and video arrangement">
+                <option value="">Arrange</option>
+                <option value="sequence">Sequence</option>
+                <option value="picture-over">Picture over video</option>
+                <option value="video-over">Video over picture</option>
+                <option value="side">Side by side</option>
+              </select>
+            </label>
+            <button type="button" id="thumb-btn">Thumbnail</button>
+            <button type="button" id="silence-btn">Silence</button>
+            <button type="button" id="record-btn">Record</button>
+          </div>
+          <div class="group">
+            <button type="button" id="split-btn" title="S">Split</button>
+            <button type="button" id="duplicate-btn" title="Ctrl+D">Duplicate</button>
+            <button type="button" id="delete-btn" title="Delete">Delete</button>
+          </div>
+          <div class="group">
+            <label class="export-size">
+              <select id="remix" aria-label="Remix preset"></select>
+            </label>
+            <button type="button" id="remix-all">Apply to all</button>
+          </div>
+          <div class="group">
+            <button type="button" id="marker-btn">Marker</button>
+            <button type="button" id="loop-btn">Loop</button>
+            <button type="button" id="guides-btn">Guides</button>
+            <button type="button" id="undo-btn" title="Ctrl+Z">Undo</button>
+            <button type="button" id="redo-btn" title="Ctrl+Shift+Z">Redo</button>
+          </div>
+          <label class="export-size">
+            <select id="export-format" aria-label="Export format"></select>
+          </label>
+          <label class="export-size">
+            <select id="export-size" aria-label="Export size">
+              <option value="1280">720p</option>
+              <option value="1920">1080p</option>
+              <option value="3840" selected>4K</option>
+              <option value="source">Source</option>
+              <option value="highest">Highest</option>
+            </select>
+          </label>
+          <button type="button" id="export-btn" class="primary">Export</button>
+        </div>
+      </header>
+      <div class="workspace">
+        <aside class="bin">
+          <h2>Media</h2>
+          <ul id="media-list"></ul>
+        </aside>
+        <section class="preview-pane">
+          <canvas id="preview"></canvas>
+          <div class="transport">
+            <button type="button" id="start-btn" title="Go to start">Start</button>
+            <button type="button" id="play-btn">Play</button>
+            <button type="button" id="end-btn" title="Go to end">End</button>
+            <span id="timecode">00:00.00</span>
+            <span id="total-time">/ 00:00.00</span>
+            <label class="zoom-label">Zoom
+              <input id="zoom" type="range" min="8" max="240" value="72" aria-label="Timeline zoom" />
+            </label>
+          </div>
+        </section>
+        <aside class="inspector">
+          <h2>Clip</h2>
+          <form id="inspector"></form>
+        </aside>
+      </div>
+      <section class="timeline" id="timeline">
+        <div id="timeline-scroll">
+          <div id="ruler"></div>
+          <div id="tracks"></div>
+          <div id="playhead"></div>
+        </div>
+      </section>
+      <footer class="statusbar">
+        <span id="status">Ready</span>
+        <span class="hint">Space play · arrows nudge · S split · Ctrl+D duplicate · Delete · Ctrl+Z undo</span>
+        <div id="export-bar"></div>
+      </footer>
+    </div>
+    <input id="file-input" type="file" accept="video/*,audio/*,image/*" multiple hidden />
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

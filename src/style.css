@@ -1,0 +1,376 @@
+:root {
+  color-scheme: dark;
+  --bg: #12110f;
+  --surface: #1c1a17;
+  --surface-2: #26231e;
+  --line: #3a342c;
+  --text: #f3eee6;
+  --muted: #b3a89b;
+  --accent: #e07a45;
+  --video: #8d4b32;
+  --overlay: #3e5c4a;
+  --audio: #3d4f6a;
+  --title: #6a5332;
+  --font: "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+}
+
+button, input, select {
+  font: inherit;
+  color: inherit;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) 268px 32px;
+  overflow: hidden;
+}
+
+.topbar, .statusbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #0e0d0b;
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar { flex-wrap: wrap; min-height: 42px; }
+
+button.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.statusbar {
+  border-bottom: 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.mark {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#project-name { color: var(--muted); }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-left: auto;
+}
+
+button {
+  height: 28px;
+  padding: 0 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+button:hover { border-color: #6a5c4e; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button:disabled { opacity: 0.5; }
+
+.group {
+  display: flex;
+  gap: 4px;
+  padding-right: 8px;
+  border-right: 1px solid var(--line);
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: #b85c2e;
+  color: #1a100c;
+  font-weight: 650;
+}
+
+.export-size select {
+  height: 28px;
+  padding: 0 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 260px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.bin, .inspector {
+  padding: 10px;
+  background: var(--surface);
+  overflow: auto;
+}
+
+.bin { border-right: 1px solid var(--line); }
+.inspector { border-left: 1px solid var(--line); }
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+#media-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.media-item, .empty {
+  padding: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+.media-item { cursor: pointer; }
+.media-item strong, .clip span { display: block; }
+.media-item small, .hint { color: var(--muted); }
+
+.preview-pane {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 40px;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #090909;
+}
+
+#preview {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: block;
+}
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border-top: 1px solid var(--line);
+}
+
+#timecode {
+  font-variant-numeric: tabular-nums;
+  min-width: 64px;
+}
+
+#total-time { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.zoom-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  color: var(--muted);
+}
+
+#zoom { width: 120px; }
+
+.timeline {
+  border-top: 1px solid var(--line);
+  background: #161410;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#timeline-scroll {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+#ruler {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 22px;
+  margin-left: 84px;
+  background: #100e0c;
+  border-bottom: 1px solid var(--line);
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-left: 1px solid #4a4036;
+  color: var(--muted);
+  font-size: 10px;
+  padding-left: 4px;
+}
+
+#tracks { position: relative; }
+
+.track {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  height: 46px;
+  border-bottom: 1px solid var(--line);
+}
+
+.track-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  color: var(--muted);
+  background: #14120f;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.mute {
+  height: 20px;
+  padding: 0 6px;
+}
+
+.marker {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid var(--accent);
+  transform: translateX(-5px);
+  cursor: pointer;
+}
+
+.lane {
+  position: relative;
+  height: 100%;
+}
+
+.clip {
+  position: absolute;
+  top: 5px;
+  height: 36px;
+  overflow: hidden;
+  padding: 3px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  color: #fff;
+  cursor: grab;
+  user-select: none;
+  box-shadow: inset 3px 0 rgba(255, 255, 255, 0.45), inset -3px 0 rgba(255, 255, 255, 0.45);
+}
+
+.clip span, .clip small {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.clip small { display: block; color: rgba(255, 255, 255, 0.8); }
+.clip.selected { outline: 2px solid var(--accent); outline-offset: 1px; }
+.clip.video { background: var(--video); }
+.clip.overlay { background: var(--overlay); }
+.clip.audio { background: var(--audio); }
+.clip.title { background: var(--title); }
+
+#playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+#playhead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid var(--accent);
+}
+
+#inspector {
+  display: grid;
+  gap: 8px;
+}
+
+.field {
+  display: grid;
+  gap: 3px;
+}
+
+.field span, .hint { color: var(--muted); }
+
+.field input, .field select, .name-edit {
+  height: 26px;
+  padding: 0 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.field input[type="range"] { padding: 0; }
+.field input[type="checkbox"] { width: 16px; height: 16px; padding: 0; }
+
+#inspector h3 {
+  margin: 8px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.statusbar { position: relative; justify-content: space-between; }
+#status { color: var(--text); }
+#export-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+}
+
+.media-stage {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#project-name { cursor: text; }
